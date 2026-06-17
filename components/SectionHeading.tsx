@@ -21,14 +21,14 @@ export default function SectionHeading({
 
   return (
     <Reveal
-      className={`relative flex items-baseline gap-[18px] overflow-hidden ${
-        compact ? "mb-9 pt-2" : "mb-[46px] pt-4"
+      className={`relative flex items-center gap-[18px] overflow-hidden ${
+        compact ? "mb-9 min-h-[92px]" : "mb-[46px] min-h-[120px]"
       }`}
     >
       <span
         aria-hidden
-        className={`pointer-events-none absolute left-[-8px] z-0 leading-none font-extrabold text-accent opacity-[0.09] select-none ${
-          compact ? "top-[-30px] text-[140px]" : "top-[-40px] text-[180px]"
+        className={`pointer-events-none absolute left-[-8px] top-1/2 z-0 -translate-y-1/2 leading-none font-extrabold text-accent opacity-[0.1] select-none ${
+          compact ? "text-[150px]" : "text-[185px]"
         }`}
       >
         {num}
