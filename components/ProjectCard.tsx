@@ -115,25 +115,32 @@ export default function ProjectCard({ project, delay = 0 }: { project: Project; 
       as="article"
       type="card"
       delay={delay}
-      className="cursor-pointer transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(31,122,77,0.13)]"
+      className="group relative cursor-pointer transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(31,122,77,0.13)]"
     >
       <Preview project={project} />
 
       <div className="mb-[6px] flex items-baseline justify-between gap-3">
-        <h3 className="m-0 text-[23px] font-bold tracking-[-0.02em]">{t(project.title)}</h3>
+        <h3 className="m-0 text-[23px] font-bold tracking-[-0.02em]">
+          {/* Stretched link: makes the whole card open the repo, with a single
+              valid anchor (avoids nested <a> with the URL line below). */}
+          <a
+            href={project.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${t(project.title)} — ouvrir le dépôt GitHub`}
+            className="text-ink no-underline after:absolute after:inset-0 after:content-['']"
+          >
+            {t(project.title)}
+          </a>
+        </h3>
         <span className="shrink-0 font-mono text-[11px] text-accent">{t(project.badge)}</span>
       </div>
 
       <p className="m-0 text-[15.5px] leading-[1.55] text-muted">{t(project.description)}</p>
 
-      <a
-        href={project.repo}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-[10px] inline-flex items-center gap-[5px] font-mono text-[11px] text-accent no-underline"
-      >
+      <span className="mt-[10px] inline-flex items-center gap-[5px] font-mono text-[11px] text-accent group-hover:underline">
         → {repoLabel}
-      </a>
+      </span>
     </Reveal>
   );
 }
