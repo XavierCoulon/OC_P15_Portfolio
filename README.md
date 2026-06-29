@@ -4,6 +4,8 @@ Portfolio web personnel **one-page**, responsive, bilingue **FR/EN** et avec **t
 
 Recréé dans une vraie codebase à partir des maquettes de référence (design « Éditorial » retenu).
 
+> ℹ️ **Projet de formation** — ce portfolio est une **démonstration** réalisée dans le cadre du **projet P15** de la formation **AI Engineer (OpenClassrooms)**. Le contenu reflète un profil réel, mais le site est un livrable pédagogique (non indexé par les moteurs de recherche).
+
 ## Stack
 
 |           |                                                                   |
