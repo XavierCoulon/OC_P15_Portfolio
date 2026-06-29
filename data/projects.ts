@@ -1,6 +1,6 @@
 import type { Bilingual } from "@/lib/i18n";
 
-export type ProjectIcon = "calendar" | "code" | "brain" | "chess" | "search";
+export type ProjectIcon = "calendar" | "code" | "brain" | "chess" | "search" | "route";
 
 type StatPreview = {
   kind: "stat";
@@ -25,9 +25,40 @@ export type Project = {
   description: Bilingual;
   repo: string;
   preview: StatPreview | ImagePreview;
+  /** Optional tech tags, shown on the featured card. */
+  tags?: string[];
+  /** Renders full-width (spans both columns) at the top of the grid. */
+  featured?: boolean;
 };
 
 export const projects: Project[] = [
+  {
+    title: { fr: "PaceRunner", en: "PaceRunner" },
+    badge: { fr: "IA · Projet P15", en: "AI · P15 capstone" },
+    description: {
+      fr: "À partir d'un fichier GPX et d'une date de course, l'app génère une allure conseillée km par km, personnalisée selon la forme du coureur (COROS) et la météo du jour J. Orchestrateur déterministe (baseline grade-adjusted, modèle de Minetti) + LLM Llama 3.1 cadré par des garde-fous et validé en JSON strict (Pydantic), avec journalisation des prédictions et monitoring du modèle.",
+      en: "From a GPX file and a race date, the app generates a per-km recommended pace, personalized to the runner's fitness (COROS) and race-day weather. Deterministic orchestrator (grade-adjusted baseline, Minetti model) + Llama 3.1 LLM bounded by guardrails and validated as strict JSON (Pydantic), with prediction logging and model monitoring.",
+    },
+    repo: "https://github.com/XavierCoulon/OC_P15_PaceRunner",
+    tags: [
+      "FastAPI",
+      "Llama 3.1 8B",
+      "Streamlit",
+      "Neon Postgres",
+      "MCP COROS",
+      "Clean Architecture",
+    ],
+    featured: true,
+    preview: {
+      kind: "stat",
+      bg: "green",
+      techLine: "GPX · COROS · Open-Meteo · Llama 3.1",
+      icon: "route",
+      metric: "km × km",
+      metricSize: "lg",
+      caption: "Allure conseillée · baseline + garde-fous IA",
+    },
+  },
   {
     title: { fr: "Atalante Movies Tracker", en: "Atalante Movies Tracker" },
     badge: { fr: "Python · Perso", en: "Python · Perso" },
