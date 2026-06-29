@@ -43,6 +43,13 @@ const ICON_PATHS: Record<ProjectIcon, React.ReactNode> = {
       <line x1="11" y1="8" x2="11" y2="14" />
     </>
   ),
+  route: (
+    <>
+      <circle cx="6" cy="19" r="3" />
+      <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" />
+      <circle cx="18" cy="5" r="3" />
+    </>
+  ),
 };
 
 function ProjectIconSvg({ name }: { name: ProjectIcon }) {
@@ -109,18 +116,14 @@ function Preview({ project }: { project: Project }) {
 export default function ProjectCard({ project, delay = 0 }: { project: Project; delay?: number }) {
   const { t } = useLang();
   const repoLabel = project.repo.replace(/^https?:\/\//, "");
+  const featured = project.featured ?? false;
 
-  return (
-    <Reveal
-      as="article"
-      type="card"
-      delay={delay}
-      className="group relative cursor-pointer transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(31,122,77,0.13)]"
-    >
-      <Preview project={project} />
+  const titleSize = featured ? "text-[28px]" : "text-[23px]";
 
+  const info = (
+    <div>
       <div className="mb-[6px] flex items-baseline justify-between gap-3">
-        <h3 className="m-0 text-[23px] font-bold tracking-[-0.02em]">
+        <h3 className={`m-0 font-bold tracking-[-0.02em] ${titleSize}`}>
           {/* Stretched link: makes the whole card open the repo, with a single
               valid anchor (avoids nested <a> with the URL line below). */}
           <a
@@ -138,9 +141,45 @@ export default function ProjectCard({ project, delay = 0 }: { project: Project; 
 
       <p className="m-0 text-[15.5px] leading-[1.55] text-muted">{t(project.description)}</p>
 
+      {featured && project.tags && (
+        <div className="mt-[14px] flex flex-wrap gap-[7px]">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-[5px] border border-border px-2 py-[3px] font-mono text-[11px] text-faint"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+
       <span className="mt-[10px] inline-flex items-center gap-[5px] font-mono text-[11px] text-accent group-hover:underline">
         → {repoLabel}
       </span>
+    </div>
+  );
+
+  return (
+    <Reveal
+      as="article"
+      type="card"
+      delay={delay}
+      className={`group relative cursor-pointer transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(31,122,77,0.13)] ${
+        featured ? "md:col-span-2" : ""
+      }`}
+    >
+      {featured ? (
+        <div className="grid gap-6 md:grid-cols-2 md:items-center md:gap-10">
+          <Preview project={project} />
+          {info}
+        </div>
+      ) : (
+        <>
+          <Preview project={project} />
+          {info}
+        </>
+      )}
     </Reveal>
   );
 }
