@@ -20,12 +20,6 @@ export default function Contact() {
 
       <Reveal delay={120} className="flex flex-wrap items-center gap-[14px]">
         <a
-          href="mailto:xcoulon.mail@gmail.com"
-          className="rounded-full bg-ink px-[26px] py-[15px] text-[17px] font-medium text-bg no-underline"
-        >
-          xcoulon.mail@gmail.com
-        </a>
-        <a
           href="https://www.linkedin.com/in/coulonxavier/"
           target="_blank"
           rel="noopener noreferrer"
