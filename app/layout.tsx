@@ -35,6 +35,8 @@ export const metadata: Metadata = {
     "Portfolio",
   ],
   authors: [{ name: "Xavier Coulon", url: "https://github.com/XavierCoulon" }],
+  // Training-project demo: keep it out of search engine indexes.
+  robots: { index: false, follow: false },
   openGraph: {
     title: "Xavier Coulon — Développeur Full Stack & Gestion de projets",
     description:
